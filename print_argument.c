@@ -11,17 +11,12 @@
 
 int print_arg(va_list list, char s)
 {
-	int i = 0;
-	char *str;
 	
 	if (s == 'c')
-	{
 		return (print_char(list));
-	} else if (s == 's')
-	{
-		return (print_string(list));
-	}
 
+	if (s == 's')
+		return (print_string(list));
 }
 
 /**
@@ -50,8 +45,9 @@ int print_string(va_list list)
 	int len;
 	char *str;
 
+	len = _strlen(va_arg(list, char *));
+	str = malloc( sizeof(char) * len);
 	str = va_arg(list, char *);
-	len = _strlen(str);
 	write(1, str, len);
 	return (len);
 }
