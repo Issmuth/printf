@@ -7,17 +7,17 @@
 int _atoi(char *str)
 {
 	int x = 0, i = 0;
-	unsigned int res = 0;
+	unsigned int y = 0;
 
 	while (!(str[i] <= '9' && str[i] >= '0') && str[i] != '\0')
 	{
-		(str[i] == '-')
+		if (str[i] == '-')
 			x *= -1;
 		i++;
 	}
 	while (str[i] <= '9' && (str[i] >= '0' && str[i] != '\0'))
 	{
-		y = (y * 10) + (s[i] - '0');
+		y = (y * 10) + (str[i] - '0');
 		i++;
 	}
 	y *= x;

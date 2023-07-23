@@ -4,11 +4,11 @@
  * @str: array of chars
  * Return: length of the array of chars
  */
-int _strlen(char *str)
+int _strlen(const char *str)
 {
 	unsigned int i = 0;
 
-	while (*s++)
+	while (str[i] != '\0')
 	{
 		i++;
 	}
