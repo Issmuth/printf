@@ -9,14 +9,23 @@
  * according to the argument
  */
 
-int print_arg(va_list list, char s)
+int print_arg(const char *frmt, va_list list, int *j)
 {
-	
-	if (s == 'c')
-		return (print_char(list));
+	int i = 0, printed;
+	struct format _format[] = {
+		{'c', print_char},
+		{'s', print_string},
+		{'\0', NULL}
+	};
 
-	if (s == 's')
-		return (print_string(list));
+	for (i = 0; _format[i].fmt != '\0'; i++)
+	{
+		if ( frmt[*j] == _format[i].fmt)
+		{
+			printed = _format[i].func(list);
+			return (printed);
+		}
+	}
 }
 
 /**
@@ -45,9 +54,8 @@ int print_string(va_list list)
 	int len;
 	char *str;
 
-	len = _strlen(va_arg(list, char *));
-	str = malloc( sizeof(char) * len);
 	str = va_arg(list, char *);
+	len = _strlen(str);
 	write(1, str, len);
 	return (len);
 }
