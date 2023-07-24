@@ -20,7 +20,7 @@ int print_arg(const char *frmt, va_list list, int *j)
 
 	for (i = 0; _format[i].fmt != '\0'; i++)
 	{
-		if ( frmt[*j] == _format[i].fmt)
+		if (frmt[*j] == _format[i].fmt)
 		{
 			printed = _format[i].func(list);
 			return (printed);
@@ -39,7 +39,7 @@ int print_char(va_list list)
 	char c;
 
 	c = va_arg(list, int);
-	return(write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 
 /**

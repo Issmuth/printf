@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 {
 	int i, printed = 0;
 	va_list ap;
-	
+
 	if (format == NULL)
 		return (-1);
 
@@ -30,5 +30,5 @@ int _printf(const char *format, ...)
 		}
 	}
 	va_end(ap);
-	return(printed);
+	return (printed);
 }
