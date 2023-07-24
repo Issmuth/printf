@@ -6,29 +6,49 @@
  *
  * Return: the number of characters printed
  */
-
 int _printf(const char *format, ...)
 {
-	int i, printed = 0;
-	va_list ap;
-	
-	if (format == NULL)
-		return (-1);
+	va_list args;
+	va_start(args, format);
 
-	va_start(ap, format);
-	for (i = 0; format[i] != '\0'; i++)
+	int count = 0;
+	char c;
+	char *s;
+
+	while (*format)
 	{
-		if (format[i] != '%')
+		if (*format == '%')
 		{
-			write(1, &format[i], 1);
-			printed++;
+			format++;
+			switch (*format)
+			{
+				case 'c':
+					c = (char) va_arg(args, int);
+					write(1, &c, 1);
+					count++;
+					break;
+				case 's':
+					s = va_arg(args, char *);
+					while (*s)
+					{
+						write(1, s, 1);
+						s++;
+						count++;
+					}
+					break;
+				default:
+					write(1, format, 1);
+					count++;
+					break;
+			}
 		} else
 		{
-			i++;
-			printed--;
-			printed +=  print_arg(format, ap, &i);
+			write(1, format, 1);
+			count++;
 		}
+		format++;
 	}
-	va_end(ap);
-	return(printed);
+
+	va_end(args);
+	return (count);
 }
