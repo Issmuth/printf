@@ -13,6 +13,9 @@ int _printf(const char *format, ...)
 	char c;
 	char *s;
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(args, format);
 	while (*format)
 	{
@@ -28,6 +31,9 @@ int _printf(const char *format, ...)
 					break;
 				case 's':
 					s = va_arg(args, char *);
+					if (s == NULL)
+						return (-1);
+
 					while (*s)
 					{
 						write(1, s, 1);
