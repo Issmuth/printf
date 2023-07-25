@@ -10,7 +10,8 @@ int print_char(va_list list)
 	char c;
 
 	c = va_arg(list, int);
-	return (write(1, &c, 1));
+	write(1, &c, 1);
+	return (1);
 }
 
 /**
@@ -44,7 +45,7 @@ int print_digits(va_list list)
 	int num = va_arg(list, int);
 	int pos = 0;
 	int is_negative = 0;
-	int count = 0;
+	int count = 3;
 	char *buffer;
 	/* Assuming the largest int can be represented in 19 characters*/
 	buffer = malloc(num * sizeof(char));
@@ -72,7 +73,8 @@ int print_digits(va_list list)
 	while (pos > 0)
 	{
 		pos--;
-		count += write(1, &buffer[pos], 1);
+		write(1, &buffer[pos], 1);
+		count++;
 	}
 	free(buffer);
 	return (count);
@@ -87,7 +89,7 @@ int print_integers(va_list list)
 {
 	int num = va_arg(list, int);
 	int i;
-	int j = 0;
+	int j = 3;
 	char *buffer;
 
 	buffer = malloc(num * sizeof(char));
@@ -102,7 +104,8 @@ int print_integers(va_list list)
 
 	for (i = 0; buffer[i] != '\0'; i++)
 	{
-		j += write(1, &buffer[i], 1);
+		write(1, &buffer[i], 1);
+		j++;
 	}
 	free(buffer);
 	return (j);
@@ -119,27 +122,28 @@ int print_integers(va_list list)
  */
 int print_arg(va_list list, char s)
 {
+	int count;
 	switch (s)
 	{
 		case 'c':
 		{
-			print_char(list);
+			count = print_char(list);
 			break;
 		}
 		case 's':
 		{
-			print_string(list);
+			count = print_string(list);
 			break;
 		}
 		case 'd':
 		{
-			print_digits(list);
+			count = print_digits(list);
 			break;
 
 		}
 		case 'i':
 		{
-			print_integers(list);
+			count = print_integers(list);
 			break;
 		}
 		default:
@@ -148,5 +152,5 @@ int print_arg(va_list list, char s)
 			break;
 		}
 	}
-	return (-1);
+	return (count);
 }
