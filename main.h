@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 int _strlen(const char *str);
-int _atoi(char *str);
 int _printf(const char *format, ...);
 int print_arg(va_list list, char s);
 int print_char(va_list list);

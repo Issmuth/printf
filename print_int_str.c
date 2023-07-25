@@ -3,7 +3,8 @@
  * print_int_str - returns a string of chars which are int
  * @num: actual integer
  * @buffer: array of chars
- * Return: void; */ void print_int_str(int num, char *buffer)
+ * Return: void; */ 
+void print_int_str(int num, char *buffer)
 {
 	int i = 0, j = 0, is_negative = 0, left = 0 /*right = i - 1*/;
 	char *temp;
@@ -44,7 +45,7 @@
 	
 	for ( left = (_strlen(buffer) - 1); left >= 0; left--)
 	{
-		temp[j++] = buffer[i++];
+		temp[j++] = buffer[left];
 	}
 	/**
 	 * while (left < right)
@@ -57,7 +58,7 @@
 	*}
 	*/
 	
-	for (i = 0; i != '\0'; i++)
+	for (i = 0; temp[i] != '\0'; i++)
 	{
 		buffer[i] = temp[i];
 	}
