@@ -45,7 +45,7 @@ int print_digits(va_list list)
 	int num = va_arg(list, int);
 	int pos = 0;
 	int is_negative = 0;
-	int count = 3;
+	int count = 0;
 	char *buffer;
 	/* Assuming the largest int can be represented in 19 characters*/
 	buffer = malloc(num * sizeof(char));
@@ -89,7 +89,7 @@ int print_integers(va_list list)
 {
 	int num = va_arg(list, int);
 	int i;
-	int j = 3;
+	int j = 0;
 	char *buffer;
 
 	buffer = malloc(num * sizeof(char));
