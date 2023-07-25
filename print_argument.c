@@ -10,6 +10,9 @@ int print_char(va_list list)
 	char c;
 
 	c = va_arg(list, int);
+	if (c == '\0')
+		return (-1);
+
 	write(1, &c, 1);
 	return (1);
 }
@@ -25,6 +28,8 @@ int print_string(va_list list)
 	char *str = va_arg(list, char*);
 	int i, len;
 
+	if (str == NULL)
+		return (-1);
 	for (i = 0; str[i] != '\0'; i++)
 	{
 		write(1, &str[i], 1);
