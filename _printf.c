@@ -17,7 +17,6 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 		return (-1);
 
-	/* the arguments we are going to pass on are given the alias ap which is an argument list */
 	va_start(ap, format);
 	/* keeping track of the whole string of chars provided */
 	len = _strlen(format);
@@ -31,18 +30,15 @@ int _printf(const char *format, ...)
 			write(1, &format[i], 1);
 			j++;
 		} else
-		/* checking if we have the special char in our list of strings in the pointer *fomart */
-		{	
+		{
 			/* now check the next char after the special char '%' */
 			specifier = format[i + 1];
 			/* delete the chars */
 			j--;
-			/* now add the value which is supposed to be there from the list of given arguments */
 			j += print_arg(ap, specifier);
 			/* even after there still continue adding the rest of chars available */
 			i++;
 		}
 	}
-	/* now j contains both the list of argumenst passed and the strings of chars which were present inside the _printf() */
-	return(j);
+	return (j);
 }

@@ -79,7 +79,7 @@ int print_digits(va_list list)
 }
 
 /**
- * print_intergers - prints only intergers alone
+ * print_integers - prints only intergers alone
  * @list: list of arguments passed
  * Return: a number to be printed
  */
@@ -144,8 +144,8 @@ int print_arg(va_list list, char s)
 		}
 		default:
 		{
-			 printf("Invalid datatype format %c", s);
-			 break;
+			printf("Invalid datatype format %c", s);
+			break;
 		}
 	}
 	return (-1);
