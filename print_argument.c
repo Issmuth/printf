@@ -152,13 +152,9 @@ int print_arg(va_list list, char s)
 			count = print_integers(list);
 			break;
 		}
-		case '%':
-			count = write(1, '%', 1);
-			break;
 		default:
 		{
-			printf("Invalid datatype format %c", s);
-			break;
+			return (-2);
 		}
 	}
 	return (count);

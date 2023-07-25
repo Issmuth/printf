@@ -34,8 +34,11 @@ int _printf(const char *format, ...)
 			/* now check the next char after the special char '%' */
 			specifier = format[i + 1];
 			/* delete the chars */
-			if (print_arg(ap, specifer) == -1)
-				return (-1);
+			if (print_arg(ap, specifier) == -2)
+			{
+				write(1, &format[i], 1);
+				j++;
+			}
 			j += print_arg(ap, specifier);
 			/* even after there still continue adding the rest of chars available */
 			i++;
