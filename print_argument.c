@@ -29,7 +29,7 @@ int print_string(va_list list)
 	int i, len;
 
 	if (str == NULL)
-		return (-1);
+		str = "(null)";
 	for (i = 0; str[i] != '\0'; i++)
 	{
 		write(1, &str[i], 1);
