@@ -57,7 +57,7 @@
 	*}
 	*/
 	
-	for (i = 0; i != '\0'; i++)
+	for (i = 0; temp[i] != '\0'; i++)
 	{
 		buffer[i] = temp[i];
 	}

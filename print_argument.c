@@ -79,7 +79,7 @@ int print_digits(va_list list)
 }
 
 /**
- * print_intergers - prints only intergers alone
+ * print_integers - prints only intergers alone
  * @list: list of arguments passed
  * Return: a number to be printed
  */
@@ -106,6 +106,37 @@ int print_integers(va_list list)
 	}
 	free(buffer);
 	return (j);
+}
+
+/**
+ * print_unsigned_int - return a unsigned int alone
+ * @list: contains a list of arguments
+ * Return: value of unsigned integer
+ */
+int print_unsigned_int(va_list list)
+{
+	unsigned int num = va_arg(list, int);
+	int n, div = 1, len = 0;
+	char c;
+
+	/* assign num to n for manipulation */
+	n = num;
+
+	/* getting each single digit and pushing it further to the left*/
+	for (; n / div > 9; )
+	{
+		div *= 10;
+	}
+
+	/* repeating the whole process but moving the char to the right*/
+	for (; div != 0; )
+	{
+		c = '0' + n / div;
+		len += write(1, &c, 1);
+		n %= div;
+		div /= 10;
+	}
+	return (len);
 }
 
 /**
@@ -140,6 +171,11 @@ int print_arg(va_list list, char s)
 		case 'i':
 		{
 			print_integers(list);
+			break;
+		}
+		case 'u':
+		{
+			print_unsigned_int(list);
 			break;
 		}
 		default:
