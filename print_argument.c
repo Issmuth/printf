@@ -42,9 +42,18 @@ int print_string(va_list list)
 int print_digits(va_list list)
 {
 	int num = va_arg(list, int);
-	char buffer[20];
+	int pos = 0;
+	int is_negative = 0;
+	int count = 0;
+	char *buffer;
 	/* Assuming the largest int can be represented in 19 characters*/
-	int pos = 0, is_negative = 0, count = 0;
+	buffer = malloc(num * sizeof(char));
+
+	if (buffer == NULL)
+	{
+		printf("Memory allocation failed");
+		return (-1);
+	}
 
 	if (num < 0)
 	{
@@ -63,9 +72,40 @@ int print_digits(va_list list)
 	while (pos > 0)
 	{
 		pos--;
-		putchar(buffer[pos]);
-		count++;
+		count += write(1, &buffer[pos], 1);
 	}
+	free(buffer);
+	return (count);
+}
+
+/**
+ * print_intergers - prints only intergers alone
+ * @list: list of arguments passed
+ * Return: a number to be printed
+ */
+int print_integers(va_list list)
+{
+	int num = va_arg(list, int);
+	int i;
+	int j = 0;
+	char *buffer;
+
+	buffer = malloc(num * sizeof(char));
+
+	if (buffer == NULL)
+	{
+		printf("Memory allocation failed");
+		return (-1);
+	}
+
+	print_int_str(num, buffer);
+
+	for (i = 0; buffer[i] != '\0'; i++)
+	{
+		j += write(1, &buffer[i], 1);
+	}
+	free(buffer);
+	return (j);
 }
 
 /**
@@ -97,8 +137,16 @@ int print_arg(va_list list, char s)
 			break;
 
 		}
+		case 'i':
+		{
+			print_integers(list);
+			break;
+		}
 		default:
+		{
 			 printf("Invalid datatype format %c", s);
+			 break;
+		}
 	}
+	return (-1);
 }
-
