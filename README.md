@@ -16,7 +16,7 @@ In the example above, `%d` and `%.2f` are format specifiers, while `x` and `pi` 
 Here's a simple example that demonstrates the usage of the `Printf Replicator` program:
 
 #include <stdio.h>
-int main(void) 
+int main(void)
 {
     int age = 25;
     char *s = "five feet eleven inches"
