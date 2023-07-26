@@ -1,10 +1,12 @@
 #include "main.h"
+
 /**
  * print_char - prints a character
  * @list: list of arguments
  *
  * Return: Always 1 if printed (successfully) -1 if fails
  */
+
 int print_char(va_list list)
 {
 	char c;
@@ -13,8 +15,7 @@ int print_char(va_list list)
 	if (c == '\0')
 		return (0);
 
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }
 
 /**
@@ -119,40 +120,31 @@ int print_integers(va_list list)
  * Return: number of character printed
  * according to the argument
  */
+
 int print_arg(va_list list, char s)
 {
-	int count;
+	int count, i, j = 0;
+	formfunc spec[] = {
+		{'c', print_char}, {'s', print_string},
+		{'d', print_digits}, {'i', print_integers},
+		{'\0', NULL}
+	};
 
-	switch (s)
+	for (i = 0; spec[i].format != '\0'; i++)
 	{
-		case 'c':
+		if (spec[i].format == s)
 		{
-			count = print_char(list);
-			break;
-		}
-		case 's':
-		{
-			count = print_string(list);
-			break;
-		}
-		case 'd':
-		{
-			count = print_digits(list);
-			break;
-
-		}
-		case 'i':
-		{
-			count = print_integers(list);
-			break;
-		}
-		case '%':
-			count = write(1, "%", 2);
-			break;
-		default:
-		{
-			return (-2);
+			count = spec[i].func(list);
+			j++;
+			return (count);
 		}
 	}
-	return (count);
+	if (j == 0)
+	{
+		write(1, "%", 1);
+		write(1, &s, 1);
+		return (2);
+	}
+
+	return (0);
 }

@@ -16,14 +16,12 @@ void print_int_str(int num, char *buffer)
 		printf("Memory allocation failed");
 		return;
 	}
-	/* handling zero values */
 	if (num == 0)
 	{
 		buffer[0] = '0';
 		buffer[1] = '\0';
 		return;
 	}
-	/* incase on negative */
 	if (num < 0)
 	{
 		is_negative = 1;

@@ -26,16 +26,10 @@ int _printf(const char *format, ...)
 			j++;
 		} else
 		{
-			if (format[i + 1] == '\0')
-				continue;
-
 			specifier = format[i + 1];
-			if (print_arg(ap, specifier) == -2)
-			{
-				write(1, &format[i], 1);
-				j++;
+
+			if (specifier == '\0')
 				continue;
-			}
 
 			j += print_arg(ap, specifier);
 			i++;
