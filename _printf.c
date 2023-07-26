@@ -27,7 +27,12 @@ int _printf(const char *format, ...)
 		} else
 		{
 			specifier = format[i + 1];
-
+			if (specifier == '%')
+			{
+				j += write(1, "%", 1);
+				i++;
+				continue;
+			}
 			if (specifier == '\0')
 				continue;
 

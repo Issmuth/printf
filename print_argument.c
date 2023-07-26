@@ -145,6 +145,5 @@ int print_arg(va_list list, char s)
 		write(1, &s, 1);
 		return (2);
 	}
-
 	return (0);
 }
