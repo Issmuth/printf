@@ -11,7 +11,7 @@ int print_char(va_list list)
 
 	c = va_arg(list, int);
 	if (c == '\0')
-		return (-1);
+		return (0);
 
 	write(1, &c, 1);
 	return (1);
@@ -93,7 +93,6 @@ int print_digits(va_list list)
 int print_integers(va_list list)
 {
 	int num = va_arg(list, int);
-	int i;
 	int j = 0;
 	char *buffer;
 
@@ -106,12 +105,7 @@ int print_integers(va_list list)
 	}
 
 	print_int_str(num, buffer);
-
-	for (i = 0; buffer[i] != '\0'; i++)
-	{
-		write(1, &buffer[i], 1);
-		j++;
-	}
+	j = write(1, buffer, _strlen(buffer));
 	free(buffer);
 	return (j);
 }
@@ -152,6 +146,9 @@ int print_arg(va_list list, char s)
 			count = print_integers(list);
 			break;
 		}
+		case '%':
+			count = write(1, "%", 2);
+			break;
 		default:
 		{
 			return (-2);

@@ -43,8 +43,10 @@ void print_int_str(int num, char *buffer)
 	{
 		temp[j++] = buffer[left];
 	}
+	temp[_strlen(buffer)] = '\0';
 	for (i = 0; temp[i] != '\0'; i++)
 	{
 		buffer[i] = temp[i];
 	}
+	buffer[i] = '\0';
 }
