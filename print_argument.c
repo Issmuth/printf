@@ -54,20 +54,20 @@ int print_digits(va_list list)
 	int is_negative = 0;
 	int count = 0;
 	char *buffer;
-	/* Assuming the largest int can be represented in 19 characters*/
-	buffer = malloc(num * sizeof(char));
 
-	if (buffer == NULL)
-	{
-		printf("Memory allocation failed");
-		return (-1);
-	}
 
 	if (num < 0)
 	{
 		is_negative = 1;
 		num = -num;
 	}
+	buffer = malloc(num * sizeof(char));
+	if (buffer == NULL)
+	{
+		printf("Memory allocation failed");
+		return (-1);
+	}
+
 	do {
 		buffer[pos++] = num % 10 + '0';
 		num /= 10;
@@ -96,9 +96,13 @@ int print_integers(va_list list)
 {
 	int num = va_arg(list, int);
 	int j = 0;
+	int b;
 	char *buffer;
 
-	buffer = malloc(num * sizeof(char));
+	if (num < 0)
+		b = num * -1;
+
+	buffer = malloc(b * sizeof(char));
 
 	if (buffer == NULL)
 	{
